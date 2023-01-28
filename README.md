@@ -7,7 +7,7 @@ You can find in this respitory the Backup file of SQL server database used gener
 
 What I did in this project:
 
-1. Build a database in SQL
-2. Analyzed and Retried Data with SQL
+1. Built a database in SQL
+2. Analyzed and Retrieved Data with SQL
 3. Connected Power BI to a Database
 4. Visualized Data in Power BI
