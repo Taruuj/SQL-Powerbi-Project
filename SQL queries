@@ -1,0 +1,39 @@
+# Analyzing revenue in SQL
+
+with hotels as (
+select * from dbo.['2018$']
+union
+select * from dbo.['2019$']
+union
+select * from dbo.['2020$'])
+
+Select 
+arrival_date_year,
+hotel,
+round(sum((stays_in_week_nights+stays_in_weekend_nights)*adr),2) as revenue 
+from hotels
+group by arrival_date_year,hotel
+
+
+
+# SQL guery used in connecting Power Bi with SQL.
+#Creates a common table expression named "hotels" which combines the data from three tables: "dbo.['2018$']", "dbo.['2019$']" and "dbo.['2020$']".
+# Selects all columns from the "hotels" CTE and performs a left join with two additional tables: "market_segment$" and "meal_cost$".
+
+with hotels as (
+select * from dbo.['2018$']
+union
+select * from dbo.['2019$']
+union
+select * from dbo.['2020$'])
+
+Select * from hotels
+left join market_segment$
+on hotels.market_segment = market_segment$.market_segment
+left join meal_cost$
+on meal_cost$.meal = hotels.meal
+
+
+# Formula used in Power Bi to create new custom column named "Revenue".
+
+([stays_in_week_nights]+[stays_in_weekend_nights])*([adr]* (1-[discount]))
